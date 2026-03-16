@@ -1,973 +1,1130 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deceptive Patterns — Theorielijst</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deceptive Patterns — Theorielijst</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  :root {
-    --bg: #F4F1EC;
-    --bg-card: #FDFCFA;
-    --ink: #1A1714;
-    --ink-mid: #5A5650;
-    --ink-light: #9B958E;
-    --border: rgba(26,23,20,0.10);
-    --border-strong: rgba(26,23,20,0.18);
+    :root {
+      --bg: #F4F1EC;
+      --bg-card: #FDFCFA;
+      --ink: #1A1714;
+      --ink-mid: #5A5650;
+      --ink-light: #9B958E;
+      --border: rgba(26, 23, 20, 0.10);
+      --border-strong: rgba(26, 23, 20, 0.18);
 
-    --mislead: #C0392B;
-    --mislead-bg: #FAF0EF;
-    --mislead-border: #EDBEBA;
+      --mislead: #C0392B;
+      --mislead-bg: #FAF0EF;
+      --mislead-border: #EDBEBA;
 
-    --manip: #004E68;
-    --manip-bg: #EDF3F6;
-    --manip-border: #A8C4CF;
+      --manip: #004E68;
+      --manip-bg: #EDF3F6;
+      --manip-border: #A8C4CF;
 
-    --obstruct: #121212;
-    --obstruct-bg: #F0F0F0;
-    --obstruct-border: #C0C0C0;
+      --obstruct: #121212;
+      --obstruct-bg: #F0F0F0;
+      --obstruct-border: #C0C0C0;
 
-    --accent: #2B5CE6;
-    --tag-bg: rgba(43,92,230,0.08);
-    --tag-border: rgba(43,92,230,0.2);
-  }
+      --accent: #2B5CE6;
+      --tag-bg: rgba(43, 92, 230, 0.08);
+      --tag-border: rgba(43, 92, 230, 0.2);
+    }
 
-  html { font-size: 16px; }
+    html {
+      font-size: 16px;
+    }
 
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
 
-  /* HEADER */
-  header {
-    padding: 56px 48px 40px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+    /* HEADER */
+    header {
+      padding: 56px 48px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-  .eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 14px;
-  }
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 14px;
+    }
 
-  h1 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(36px, 5vw, 58px);
-    font-weight: 600;
-    line-height: 1.05;
-    letter-spacing: -.02em;
-    color: var(--ink);
-    margin-bottom: 16px;
-  }
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
 
-  h1 em {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--ink-mid);
-  }
+    h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-mid);
+    }
 
-  .subtitle {
-    font-size: 15px;
-    color: var(--ink-mid);
-    max-width: 560px;
-    line-height: 1.7;
-  }
+    .subtitle {
+      font-size: 15px;
+      color: var(--ink-mid);
+      max-width: 560px;
+      line-height: 1.7;
+    }
 
-  /* SOURCES */
-  .sources {
-    display: flex;
-    gap: 10px;
-    margin-top: 24px;
-    flex-wrap: wrap;
-  }
+    /* SOURCES */
+    .sources {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
 
-  .source-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: .08em;
-    padding: 5px 12px;
-    border-radius: 3px;
-    border: 1px solid var(--border-strong);
-    color: var(--ink-mid);
-    background: transparent;
-    line-height: 1.6;
-  }
-  .source-tag em { font-style: italic; font-family: 'Fraunces', serif; font-size: 11px; letter-spacing: 0; }
+    .source-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .08em;
+      padding: 5px 12px;
+      border-radius: 3px;
+      border: 1px solid var(--border-strong);
+      color: var(--ink-mid);
+      background: transparent;
+      line-height: 1.6;
+    }
 
-  /* CONTROLS */
-  .controls {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 48px 28px;
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+    .source-tag em {
+      font-style: italic;
+      font-family: 'Fraunces', serif;
+      font-size: 11px;
+      letter-spacing: 0;
+    }
 
-  .filter-group {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
+    /* CONTROLS */
+    .controls {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px 28px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
 
-  .filter-btn {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .06em;
-    padding: 7px 14px;
-    border-radius: 4px;
-    border: 1px solid var(--border-strong);
-    background: transparent;
-    color: var(--ink-mid);
-    cursor: pointer;
-    transition: all .15s ease;
-  }
+    .filter-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
 
-  .filter-btn:hover { background: var(--bg-card); color: var(--ink); }
+    .filter-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .06em;
+      padding: 7px 14px;
+      border-radius: 4px;
+      border: 1px solid var(--border-strong);
+      background: transparent;
+      color: var(--ink-mid);
+      cursor: pointer;
+      transition: all .15s ease;
+    }
 
-  .filter-btn.active {
-    background: var(--ink);
-    color: var(--bg);
-    border-color: var(--ink);
-  }
+    .filter-btn:hover {
+      background: var(--bg-card);
+      color: var(--ink);
+    }
 
-  .filter-btn.cat-mislead.active { background: var(--mislead); border-color: var(--mislead); }
-  .filter-btn.cat-manip.active   { background: var(--manip);   border-color: var(--manip);   }
-  .filter-btn.cat-obstruct.active{ background: var(--obstruct); border-color: var(--obstruct);}
+    .filter-btn.active {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
 
-  .search-wrap {
-    margin-left: auto;
-    position: relative;
-  }
+    .filter-btn.cat-mislead.active {
+      background: var(--mislead);
+      border-color: var(--mislead);
+    }
 
-  .search-wrap input {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    padding: 7px 14px 7px 34px;
-    border-radius: 4px;
-    border: 1px solid var(--border-strong);
-    background: var(--bg-card);
-    color: var(--ink);
-    width: 220px;
-    outline: none;
-    transition: border-color .15s;
-  }
+    .filter-btn.cat-manip.active {
+      background: var(--manip);
+      border-color: var(--manip);
+    }
 
-  .search-wrap input:focus { border-color: var(--accent); }
-  .search-wrap input::placeholder { color: var(--ink-light); }
+    .filter-btn.cat-obstruct.active {
+      background: var(--obstruct);
+      border-color: var(--obstruct);
+    }
 
-  .search-icon {
-    position: absolute;
-    left: 11px; top: 50%;
-    transform: translateY(-50%);
-    color: var(--ink-light);
-    font-size: 14px;
-    pointer-events: none;
-  }
+    .search-wrap {
+      margin-left: auto;
+      position: relative;
+    }
 
-  /* MAIN GRID */
-  main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 48px 80px;
-  }
+    .search-wrap input {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      padding: 7px 14px 7px 34px;
+      border-radius: 4px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-card);
+      color: var(--ink);
+      width: 220px;
+      outline: none;
+      transition: border-color .15s;
+    }
 
-  /* CATEGORY SECTION */
-  .cat-section { margin-bottom: 48px; }
+    .search-wrap input:focus {
+      border-color: var(--accent);
+    }
 
-  .cat-title {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 16px;
-  }
+    .search-wrap input::placeholder {
+      color: var(--ink-light);
+    }
 
-  .cat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    padding: 4px 12px;
-    border-radius: 3px;
-    font-weight: 500;
-  }
+    .search-icon {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink-light);
+      font-size: 14px;
+      pointer-events: none;
+    }
 
-  .cat-mislead .cat-label { background: var(--mislead-bg); color: var(--mislead); border: 1px solid var(--mislead-border); }
-  .cat-manip   .cat-label { background: var(--manip-bg);   color: var(--manip);   border: 1px solid var(--manip-border);   }
-  .cat-obstruct.cat-label,
-  .section-obstruct .cat-label { background: var(--obstruct-bg); color: var(--obstruct); border: 1px solid var(--obstruct-border); }
+    /* MAIN GRID */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
 
-  .cat-desc {
-    font-size: 12px;
-    color: var(--ink-light);
-    font-style: italic;
-  }
+    /* CATEGORY SECTION */
+    .cat-section {
+      margin-bottom: 48px;
+    }
 
-  /* TABLE HEADER */
-  .table-head {
-    display: grid;
-    grid-template-columns: 200px 1fr 240px;
-    gap: 0;
-    padding: 6px 16px;
-    border-bottom: 1px solid var(--border-strong);
-    margin-bottom: 4px;
-  }
+    .cat-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
 
-  .th {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-  }
+    .cat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 3px;
+      font-weight: 500;
+    }
 
-  /* PATTERN CARD */
-  .pattern-card {
-    display: grid;
-    grid-template-columns: 200px 1fr 240px;
-    gap: 0;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    margin-bottom: 6px;
-    padding: 14px 16px;
-    transition: border-color .15s, box-shadow .15s;
-    position: relative;
-    overflow: visible;
-  }
+    .cat-mislead .cat-label {
+      background: var(--mislead-bg);
+      color: var(--mislead);
+      border: 1px solid var(--mislead-border);
+    }
 
-  .pattern-card:hover {
-    border-color: var(--border-strong);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-  }
+    .cat-manip .cat-label {
+      background: var(--manip-bg);
+      color: var(--manip);
+      border: 1px solid var(--manip-border);
+    }
 
-  .pattern-card.hidden { display: none; }
+    .cat-obstruct.cat-label,
+    .section-obstruct .cat-label {
+      background: var(--obstruct-bg);
+      color: var(--obstruct);
+      border: 1px solid var(--obstruct-border);
+    }
 
-  .p-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1.4;
-    padding-right: 12px;
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-  }
+    .cat-desc {
+      font-size: 12px;
+      color: var(--ink-light);
+      font-style: italic;
+    }
 
-  .cat-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 5px;
-  }
+    /* TABLE HEADER */
+    .table-head {
+      display: grid;
+      grid-template-columns: 200px 1fr 240px;
+      gap: 0;
+      padding: 6px 16px;
+      border-bottom: 1px solid var(--border-strong);
+      margin-bottom: 4px;
+    }
 
-  .dot-mislead  { background: var(--mislead); }
-  .dot-manip    { background: var(--manip); }
-  .dot-obstruct { background: var(--obstruct); }
+    .th {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
 
-  .p-def {
-    font-size: 12.5px;
-    color: var(--ink-mid);
-    line-height: 1.6;
-    padding-right: 16px;
-  }
+    /* PATTERN CARD */
+    .pattern-card {
+      display: grid;
+      grid-template-columns: 200px 1fr 240px;
+      gap: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 6px;
+      padding: 14px 16px;
+      transition: border-color .15s, box-shadow .15s;
+      position: relative;
+      overflow: visible;
+    }
 
-  .principles-col {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
+    .pattern-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    }
 
-  /* PRINCIPLE TAG */
-  .ptag {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--tag-bg);
-    border: 1px solid var(--tag-border);
-    border-radius: 4px;
-    padding: 3px 8px;
-    font-size: 11px;
-    color: var(--accent);
-    cursor: pointer;
-    transition: all .12s;
-    width: fit-content;
-    position: relative;
-  }
+    .pattern-card.hidden {
+      display: none;
+    }
 
-  .ptag:hover {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-  }
+    .p-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.4;
+      padding-right: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
 
-  .ptag-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    opacity: .7;
-    letter-spacing: .04em;
-  }
+    .cat-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
 
-  .ptag.inverted {
-    background: rgba(43,92,230,0.03);
-    border-style: dashed;
-  }
+    .dot-mislead {
+      background: var(--mislead);
+    }
 
-  /* TOOLTIP / MODAL */
-  .tooltip-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(26,23,20,0.35);
-    backdrop-filter: blur(4px);
-    z-index: 100;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
+    .dot-manip {
+      background: var(--manip);
+    }
 
-  .tooltip-overlay.open { display: flex; }
+    .dot-obstruct {
+      background: var(--obstruct);
+    }
 
-  .tooltip-box {
-    background: var(--bg-card);
-    border: 1px solid var(--border-strong);
-    border-radius: 10px;
-    max-width: 480px;
-    width: 100%;
-    padding: 32px;
-    position: relative;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.14);
-    animation: slideUp .2s ease;
-  }
+    .p-def {
+      font-size: 12.5px;
+      color: var(--ink-mid);
+      line-height: 1.6;
+      padding-right: 16px;
+    }
 
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+    .principles-col {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
 
-  .tooltip-close {
-    position: absolute;
-    top: 16px; right: 16px;
-    background: none; border: none;
-    cursor: pointer;
-    color: var(--ink-light);
-    font-size: 20px;
-    line-height: 1;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: background .12s;
-  }
+    /* PRINCIPLE TAG */
+    .ptag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 11px;
+      color: var(--accent);
+      cursor: pointer;
+      transition: all .12s;
+      width: fit-content;
+      position: relative;
+    }
 
-  .tooltip-close:hover { background: var(--border); color: var(--ink); }
+    .ptag:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
 
-  .tooltip-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: .1em;
-    color: var(--ink-light);
-    margin-bottom: 8px;
-  }
+    .ptag-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      opacity: .7;
+      letter-spacing: .04em;
+    }
 
-  .tooltip-name {
-    font-family: 'Fraunces', serif;
-    font-size: 26px;
-    font-weight: 600;
-    line-height: 1.1;
-    color: var(--ink);
-    margin-bottom: 14px;
-  }
+    .ptag.inverted {
+      background: rgba(43, 92, 230, 0.03);
+      border-style: dashed;
+    }
 
-  .tooltip-oneliner {
-    font-size: 14px;
-    color: var(--accent);
-    font-weight: 500;
-    margin-bottom: 16px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-  }
+    /* TOOLTIP / MODAL */
+    .tooltip-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 23, 20, 0.35);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
 
-  .tooltip-desc {
-    font-size: 13.5px;
-    color: var(--ink-mid);
-    line-height: 1.75;
-    margin-bottom: 16px;
-  }
+    .tooltip-overlay.open {
+      display: flex;
+    }
 
-  .tooltip-used-in {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 8px;
-  }
+    .tooltip-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      max-width: 480px;
+      width: 100%;
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.14);
+      animation: slideUp .2s ease;
+    }
 
-  .used-in-tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
 
-  .used-in-tag {
-    font-size: 11px;
-    padding: 3px 9px;
-    border-radius: 3px;
-    border: 1px solid var(--border);
-    color: var(--ink-mid);
-  }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  /* NO RESULTS */
-  .no-results {
-    text-align: center;
-    padding: 64px 0;
-    color: var(--ink-light);
-    font-style: italic;
-    display: none;
-  }
+    .tooltip-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--ink-light);
+      font-size: 20px;
+      line-height: 1;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: background .12s;
+    }
 
-  /* LEGEND */
-  .legend {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 48px 32px;
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+    .tooltip-close:hover {
+      background: var(--border);
+      color: var(--ink);
+    }
 
-  .legend-item {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 11px; color: var(--ink-mid);
-  }
+    .tooltip-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .1em;
+      color: var(--ink-light);
+      margin-bottom: 8px;
+    }
 
-  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .tooltip-name {
+      font-family: 'Fraunces', serif;
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
 
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    header, .controls, main, .legend { padding-left: 20px; padding-right: 20px; }
-    .pattern-card, .table-head { grid-template-columns: 1fr; }
-    .table-head { display: none; }
-    .p-name { margin-bottom: 8px; }
-    .p-def { margin-bottom: 10px; }
-    .search-wrap { margin-left: 0; }
-    .search-wrap input { width: 100%; }
-  }
-</style>
+    .tooltip-oneliner {
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tooltip-desc {
+      font-size: 13.5px;
+      color: var(--ink-mid);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .tooltip-used-in {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 8px;
+    }
+
+    .used-in-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .used-in-tag {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      color: var(--ink-mid);
+    }
+
+    /* NO RESULTS */
+    .no-results {
+      text-align: center;
+      padding: 64px 0;
+      color: var(--ink-light);
+      font-style: italic;
+      display: none;
+    }
+
+    /* LEGEND */
+    .legend {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px 32px;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--ink-mid);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+
+      header,
+      .controls,
+      main,
+      .legend {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .pattern-card,
+      .table-head {
+        grid-template-columns: 1fr;
+      }
+
+      .table-head {
+        display: none;
+      }
+
+      .p-name {
+        margin-bottom: 8px;
+      }
+
+      .p-def {
+        margin-bottom: 10px;
+      }
+
+      .search-wrap {
+        margin-left: 0;
+      }
+
+      .search-wrap input {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-  <p class="eyebrow">Lesmateriaal · Deceptive Patterns</p>
-  <h1>Patronen &amp; <em>Psychologie</em></h1>
-  <p class="subtitle">Alle deceptive patterns met de cognitieve principes die ze activeren. Klik op een principe voor uitleg.</p>
-  <div class="sources">
-    <span class="source-tag">Brignull, H., Leiser, M., Santos, C., &amp; Doshi, K. (2023). <em>Deceptive patterns – user interfaces designed to trick you</em>. deceptive.design</span>
-    <span class="source-tag">Benoni, D., &amp; Lavallée, L.-X. (z.d.). <em>Psychology of design: 106 cognitive biases &amp; principles that affect your UX</em>. growth.design/psychology</span>
-  </div>
-</header>
+  <header>
+    <p class="eyebrow">Lesmateriaal · Deceptive Patterns</p>
+    <h1>Patronen &amp; <em>Psychologie</em></h1>
+    <p class="subtitle">Alle deceptive patterns met de cognitieve principes die ze activeren. Klik op een principe voor
+      uitleg.</p>
+    <div class="sources">
+      <span class="source-tag">Brignull, H., Leiser, M., Santos, C., &amp; Doshi, K. (2023). <em>Deceptive patterns –
+          user interfaces designed to trick you</em>. deceptive.design</span>
+      <span class="source-tag">Benoni, D., &amp; Lavallée, L.-X. (z.d.). <em>Psychology of design: 106 cognitive biases
+          &amp; principles that affect your UX</em>. growth.design/psychology</span>
+    </div>
+  </header>
 
-<div class="controls">
-  <div class="filter-group">
-    <button class="filter-btn active" data-filter="all">Alles</button>
-    <button class="filter-btn cat-mislead" data-filter="mislead">Misleiden</button>
-    <button class="filter-btn cat-manip"   data-filter="manip">Manipuleren</button>
-    <button class="filter-btn cat-obstruct" data-filter="obstruct">Obstrueren</button>
-  </div>
-  <div class="search-wrap">
-    <span class="search-icon">⌕</span>
-    <input type="text" id="search" placeholder="Zoek patroon of principe…">
-  </div>
-</div>
-
-<div class="legend">
-  <span class="legend-item"><span class="legend-dot" style="background:var(--mislead)"></span>Misleiden</span>
-  <span class="legend-item"><span class="legend-dot" style="background:var(--manip)"></span>Manipuleren</span>
-  <span class="legend-item"><span class="legend-dot" style="background:var(--obstruct)"></span>Obstrueren</span>
-  <span style="font-size:11px;color:var(--ink-light);margin-left:auto;font-style:italic">Klik op een blauw principe voor uitleg</span>
-</div>
-
-<main>
-
-<!-- MISLEIDEN -->
-<section class="cat-section" data-cat="mislead">
-  <div class="cat-title">
-    <span class="cat-label cat-mislead">Misleiden</span>
-    <span class="cat-desc">Informatie verborgen, vervormd of gefaseerd onthuld</span>
-  </div>
-  <div class="table-head">
-    <span class="th">Patroon</span>
-    <span class="th">Wat het doet</span>
-    <span class="th">Psychologisch principe</span>
-  </div>
-
-  <div class="pattern-card" data-cat="mislead" data-text="hidden costs drip pricing verborgen kosten anchoring sunk cost hick">
-    <div class="p-name"><span class="cat-dot dot-mislead"></span>Hidden costs / Drip pricing</div>
-    <div class="p-def">Lage startprijs getoond, echte kosten komen pas zichtbaar bij de checkout — nadat de gebruiker al tijd en energie heeft geïnvesteerd.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="anchoring"><span class="ptag-num">#5</span> Anchoring Bias</span>
-      <span class="ptag" data-principle="sunk-cost"><span class="ptag-num">#67</span> Sunk Cost Effect</span>
-      <span class="ptag" data-principle="hick"><span class="ptag-num">#1</span> Hick's Law</span>
+  <div class="controls">
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="all">Alles</button>
+      <button class="filter-btn cat-mislead" data-filter="mislead">Misleiden</button>
+      <button class="filter-btn cat-manip" data-filter="manip">Manipuleren</button>
+      <button class="filter-btn cat-obstruct" data-filter="obstruct">Obstrueren</button>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="search" placeholder="Zoek patroon of principe…">
     </div>
   </div>
 
-  <div class="pattern-card" data-cat="mislead" data-text="sneaking verborgen informatie selective attention cognitive load banner blindness">
-    <div class="p-name"><span class="cat-dot dot-mislead"></span>Sneaking</div>
-    <div class="p-def">Pertinente informatie wordt verborgen of uitgesteld zodat de gebruiker handelt zonder het volledige plaatje te kennen.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="selective-attention"><span class="ptag-num">#14</span> Selective Attention</span>
-      <span class="ptag" data-principle="cognitive-load"><span class="ptag-num">#4</span> Cognitive Load</span>
-      <span class="ptag" data-principle="banner-blindness"><span class="ptag-num">#16</span> Banner Blindness</span>
+  <div class="legend">
+    <span class="legend-item"><span class="legend-dot" style="background:var(--mislead)"></span>Misleiden</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--manip)"></span>Manipuleren</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--obstruct)"></span>Obstrueren</span>
+    <span style="font-size:11px;color:var(--ink-light);margin-left:auto;font-style:italic">Klik op een blauw principe
+      voor uitleg</span>
+  </div>
+
+  <main>
+
+    <!-- MISLEIDEN -->
+    <section class="cat-section" data-cat="mislead">
+      <div class="cat-title">
+        <span class="cat-label cat-mislead">Misleiden</span>
+        <span class="cat-desc">Informatie verborgen, vervormd of gefaseerd onthuld</span>
+      </div>
+      <div class="table-head">
+        <span class="th">Patroon</span>
+        <span class="th">Wat het doet</span>
+        <span class="th">Psychologisch principe</span>
+      </div>
+
+      <div class="pattern-card" data-cat="mislead"
+        data-text="hidden costs drip pricing verborgen kosten anchoring sunk cost hick">
+        <div class="p-name"><span class="cat-dot dot-mislead"></span>Hidden costs / Drip pricing</div>
+        <div class="p-def">Lage startprijs getoond, echte kosten komen pas zichtbaar bij de checkout — nadat de
+          gebruiker al tijd en energie heeft geïnvesteerd.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="anchoring"><span class="ptag-num">#5</span> Anchoring Bias</span>
+          <span class="ptag" data-principle="sunk-cost"><span class="ptag-num">#67</span> Sunk Cost Effect</span>
+          <span class="ptag" data-principle="hick"><span class="ptag-num">#1</span> Hick's Law</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="mislead"
+        data-text="sneaking verborgen informatie selective attention cognitive load banner blindness">
+        <div class="p-name"><span class="cat-dot dot-mislead"></span>Sneaking</div>
+        <div class="p-def">Pertinente informatie wordt verborgen of uitgesteld zodat de gebruiker handelt zonder het
+          volledige plaatje te kennen.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="selective-attention"><span class="ptag-num">#14</span> Selective
+            Attention</span>
+          <span class="ptag" data-principle="cognitive-load"><span class="ptag-num">#4</span> Cognitive Load</span>
+          <span class="ptag" data-principle="banner-blindness"><span class="ptag-num">#16</span> Banner Blindness</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="mislead"
+        data-text="trick wording verwarrende taal cognitive load priming cognitive dissonance">
+        <div class="p-name"><span class="cat-dot dot-mislead"></span>Trick wording</div>
+        <div class="p-def">Verwarrende, dubbelzinnige of misleidende taal stuurt de gebruiker naar een keuze die hij
+          niet bedoelde te maken.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="cognitive-load"><span class="ptag-num">#4</span> Cognitive Load</span>
+          <span class="ptag" data-principle="cognitive-dissonance"><span class="ptag-num">#50</span> Cognitive
+            Dissonance</span>
+          <span class="ptag" data-principle="priming"><span class="ptag-num">#3</span> Priming</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="mislead"
+        data-text="visual interference visuele verstoring visual hierarchy von restorff contrast camouflage">
+        <div class="p-name"><span class="cat-dot dot-mislead"></span>Visual interference</div>
+        <div class="p-def">Informatie wordt visueel verborgen, gecamoufleerd of vervormd in de layout zodat de gebruiker
+          het over het hoofd ziet.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="visual-hierarchy"><span class="ptag-num">#13</span> Visual Hierarchy</span>
+          <span class="ptag" data-principle="von-restorff"><span class="ptag-num">#12</span> Von Restorff Effect</span>
+          <span class="ptag" data-principle="contrast"><span class="ptag-num">#19</span> Contrast</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="mislead"
+        data-text="disguised ads verkapte reclame banner blindness mental model priming">
+        <div class="p-name"><span class="cat-dot dot-mislead"></span>Disguised ads</div>
+        <div class="p-def">Reclame ziet eruit als een interface-element of organische content, zodat de gebruiker er
+          onbewust op klikt.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="banner-blindness"><span class="ptag-num">#16</span> Banner Blindness</span>
+          <span class="ptag" data-principle="mental-model"><span class="ptag-num">#33</span> Mental Model</span>
+          <span class="ptag" data-principle="priming"><span class="ptag-num">#3</span> Priming</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="mislead"
+        data-text="comparison prevention vergelijken onmogelijk hick decision fatigue anchoring">
+        <div class="p-name"><span class="cat-dot dot-mislead"></span>Comparison prevention</div>
+        <div class="p-def">Prijzen en features worden zo verpakt dat eerlijk vergelijken onmogelijk wordt — de gebruiker
+          kan geen weloverwogen keuze maken.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="hick"><span class="ptag-num">#1</span> Hick's Law</span>
+          <span class="ptag" data-principle="decision-fatigue"><span class="ptag-num">#68</span> Decision Fatigue</span>
+          <span class="ptag" data-principle="anchoring"><span class="ptag-num">#5</span> Anchoring Bias</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANIPULEREN -->
+    <section class="cat-section" data-cat="manip">
+      <div class="cat-title">
+        <span class="cat-label"
+          style="background:var(--manip-bg);color:var(--manip);border:1px solid var(--manip-border);">Manipuleren</span>
+        <span class="cat-desc">Feiten kloppen, maar de presentatie stuurt via biases en emotie</span>
+      </div>
+      <div class="table-head">
+        <span class="th">Patroon</span>
+        <span class="th">Wat het doet</span>
+        <span class="th">Psychologisch principe</span>
+      </div>
+
+      <div class="pattern-card" data-cat="manip"
+        data-text="fake scarcity nepschaarsheid scarcity loss aversion hyperbolic discounting">
+        <div class="p-name"><span class="cat-dot dot-manip"></span>Fake scarcity</div>
+        <div class="p-def">Een nepindicatie van beperkte voorraad of populariteit zet de gebruiker onder druk om snel te
+          beslissen.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="scarcity"><span class="ptag-num">#31</span> Scarcity</span>
+          <span class="ptag" data-principle="loss-aversion"><span class="ptag-num">#65</span> Loss Aversion</span>
+          <span class="ptag" data-principle="hyperbolic"><span class="ptag-num">#77</span> Hyperbolic Discounting</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="manip"
+        data-text="fake urgency nep countdown tijdsdruk loss aversion hyperbolic decision fatigue">
+        <div class="p-name"><span class="cat-dot dot-manip"></span>Fake urgency</div>
+        <div class="p-def">Een nepcountdown of tijdsbeperking dwingt de gebruiker tot een snelle beslissing die hij bij
+          meer tijd niet zou nemen.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="loss-aversion"><span class="ptag-num">#65</span> Loss Aversion</span>
+          <span class="ptag" data-principle="hyperbolic"><span class="ptag-num">#77</span> Hyperbolic Discounting</span>
+          <span class="ptag" data-principle="decision-fatigue"><span class="ptag-num">#68</span> Decision Fatigue</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="manip"
+        data-text="fake social proof nep reviews social proof bandwagon authority bias">
+        <div class="p-name"><span class="cat-dot dot-manip"></span>Fake social proof</div>
+        <div class="p-def">Nepreviews, fabricated testimonials of activiteitsmeldingen misleiden de gebruiker over de
+          echte populariteit of kwaliteit.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="social-proof"><span class="ptag-num">#30</span> Social Proof</span>
+          <span class="ptag" data-principle="bandwagon"><span class="ptag-num">#85</span> Bandwagon Effect</span>
+          <span class="ptag" data-principle="authority"><span class="ptag-num">#42</span> Authority Bias</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="manip"
+        data-text="preselection voorgeselecteerd default bias commitment fitts">
+        <div class="p-name"><span class="cat-dot dot-manip"></span>Preselection</div>
+        <div class="p-def">De meest winstgevende optie staat al aangevinkt bij het laden van de pagina — de gebruiker
+          moet actief iets veranderen om anders te kiezen.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="default-bias"><span class="ptag-num">#63</span> Default Bias</span>
+          <span class="ptag" data-principle="commitment"><span class="ptag-num">#66</span> Commitment &
+            Consistency</span>
+          <span class="ptag" data-principle="fitts"><span class="ptag-num">#8</span> Fitts's Law</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="manip"
+        data-text="confirmshaming schuldgevoel opt-out loss aversion empathy gap framing">
+        <div class="p-name"><span class="cat-dot dot-manip"></span>Confirmshaming</div>
+        <div class="p-def">De opt-out knop is geformuleerd als zelfkritiek of verlies — "Nee, ik wil geen korting" —
+          zodat de gebruiker zich schuldig voelt bij een legitieme keuze.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="loss-aversion"><span class="ptag-num">#65</span> Loss Aversion</span>
+          <span class="ptag" data-principle="empathy-gap"><span class="ptag-num">#10</span> Empathy Gap</span>
+          <span class="ptag" data-principle="framing"><span class="ptag-num">#23</span> Framing</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="manip"
+        data-text="nagging herhaalde prompts onderbreken reactance decision fatigue variable reward">
+        <div class="p-name"><span class="cat-dot dot-manip"></span>Nagging</div>
+        <div class="p-def">Herhaalde, opdringerige prompts onderbreken de taak van de gebruiker totdat hij uit
+          vermoeidheid toegeeft.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="reactance"><span class="ptag-num">#69</span> Reactance</span>
+          <span class="ptag" data-principle="decision-fatigue"><span class="ptag-num">#68</span> Decision Fatigue</span>
+          <span class="ptag" data-principle="variable-reward"><span class="ptag-num">#44</span> Variable Reward</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- OBSTRUEREN -->
+    <section class="cat-section" data-cat="obstruct">
+      <div class="cat-title">
+        <span class="cat-label"
+          style="background:var(--obstruct-bg);color:var(--obstruct);border:1px solid var(--obstruct-border);">Obstrueren</span>
+        <span class="cat-desc">Makkelijk in, bewust moeilijk uit</span>
+      </div>
+      <div class="table-head">
+        <span class="th">Patroon</span>
+        <span class="th">Wat het doet</span>
+        <span class="th">Psychologisch principe</span>
+      </div>
+
+      <div class="pattern-card" data-cat="obstruct"
+        data-text="roach motel hard to cancel opzeggen sunk cost fitts hick obstruction">
+        <div class="p-name"><span class="cat-dot dot-obstruct"></span>Hard to cancel / Roach motel</div>
+        <div class="p-def">Inschrijven kost 2 klikken, opzeggen is een hindernisbaan van meerdere stappen, afleiding en
+          retention-aanbiedingen.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="sunk-cost"><span class="ptag-num">#67</span> Sunk Cost Effect</span>
+          <span class="ptag inverted" data-principle="fitts"><span class="ptag-num">#8</span> Fitts's Law ↩</span>
+          <span class="ptag inverted" data-principle="hick"><span class="ptag-num">#1</span> Hick's Law ↩</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="obstruct"
+        data-text="hidden subscription forced continuity gratis trial betalend default bias investment commitment">
+        <div class="p-name"><span class="cat-dot dot-obstruct"></span>Hidden subscription / Forced continuity</div>
+        <div class="p-def">Een gratis proefperiode loopt stilletjes over in een betalend abonnement — zonder
+          herinnering, zonder expliciete toestemming.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="default-bias"><span class="ptag-num">#63</span> Default Bias</span>
+          <span class="ptag" data-principle="investment"><span class="ptag-num">#64</span> Investment Loops</span>
+          <span class="ptag" data-principle="commitment"><span class="ptag-num">#66</span> Commitment &
+            Consistency</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="obstruct"
+        data-text="obstruction barrières extra stappen cognitive load decision fatigue goal gradient">
+        <div class="p-name"><span class="cat-dot dot-obstruct"></span>Obstruction</div>
+        <div class="p-def">Barrières en extra stappen maken het moeilijk om informatie op te vragen, instellingen te
+          wijzigen of je account op te zeggen.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="cognitive-load"><span class="ptag-num">#4</span> Cognitive Load</span>
+          <span class="ptag" data-principle="decision-fatigue"><span class="ptag-num">#68</span> Decision Fatigue</span>
+          <span class="ptag inverted" data-principle="goal-gradient"><span class="ptag-num">#51</span> Goal Gradient
+            ↩</span>
+        </div>
+      </div>
+
+      <div class="pattern-card" data-cat="obstruct"
+        data-text="forced action gedwongen actie reactance commitment sunk cost">
+        <div class="p-name"><span class="cat-dot dot-obstruct"></span>Forced action</div>
+        <div class="p-def">Om het eigenlijke doel te bereiken moet de gebruiker iets ongewensts doen — een account
+          aanmaken, data delen of een nieuwsbrief accepteren.</div>
+        <div class="principles-col">
+          <span class="ptag" data-principle="reactance"><span class="ptag-num">#69</span> Reactance</span>
+          <span class="ptag" data-principle="commitment"><span class="ptag-num">#66</span> Commitment &
+            Consistency</span>
+          <span class="ptag" data-principle="sunk-cost"><span class="ptag-num">#67</span> Sunk Cost Effect</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="no-results" id="no-results">Geen patronen gevonden voor deze zoekopdracht.</div>
+
+  </main>
+
+  <!-- TOOLTIP OVERLAY -->
+  <div class="tooltip-overlay" id="overlay" onclick="closeTooltip(event)">
+    <div class="tooltip-box" id="tooltip-box">
+      <button class="tooltip-close" onclick="closeOverlay()">✕</button>
+      <div class="tooltip-num" id="tt-num"></div>
+      <div class="tooltip-name" id="tt-name"></div>
+      <div class="tooltip-oneliner" id="tt-oneliner"></div>
+      <div class="tooltip-desc" id="tt-desc"></div>
+      <div class="tooltip-used-in">Toegepast in</div>
+      <div class="used-in-tags" id="tt-used-in"></div>
     </div>
   </div>
 
-  <div class="pattern-card" data-cat="mislead" data-text="trick wording verwarrende taal cognitive load priming cognitive dissonance">
-    <div class="p-name"><span class="cat-dot dot-mislead"></span>Trick wording</div>
-    <div class="p-def">Verwarrende, dubbelzinnige of misleidende taal stuurt de gebruiker naar een keuze die hij niet bedoelde te maken.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="cognitive-load"><span class="ptag-num">#4</span> Cognitive Load</span>
-      <span class="ptag" data-principle="cognitive-dissonance"><span class="ptag-num">#50</span> Cognitive Dissonance</span>
-      <span class="ptag" data-principle="priming"><span class="ptag-num">#3</span> Priming</span>
-    </div>
-  </div>
+  <script>
+    const PRINCIPLES = {
+      'anchoring': {
+        num: '#5', name: 'Anchoring Bias',
+        oneliner: 'Het eerste stuk informatie dat je ziet bepaalt hoe je alles daarna beoordeelt.',
+        desc: 'Tversky & Kahneman (1974) toonden aan dat mensen zich sterk laten beïnvloeden door het eerste stuk informatie dat ze zien — het "anker". Een hoge originele prijs maakt een lagere prijs automatisch aantrekkelijk, zelfs als de korting kunstmatig is. Systeem 1 vergelijkt snel en relatief; Systeem 2 zou de absolute vraag stellen: heb ik dit nodig?',
+        used: ['Hidden costs / Drip pricing', 'Comparison prevention']
+      },
+      'sunk-cost': {
+        num: '#67', name: 'Sunk Cost Effect',
+        oneliner: 'Je blijft investeren omdat je al zoveel geïnvesteerd hebt — ook als stoppen rationeler is.',
+        desc: 'Mensen zijn reluctant om iets op te geven waarin ze al tijd, geld of energie hebben gestoken. Drip pricing maakt gebruik van dit effect: tegen de tijd dat je de echte prijs ziet, heb je al te veel in het aankoopproces geïnvesteerd om terug te keren. Ook Roach Motel activeert dit — je betaalt al maanden voor een abonnement dat je wil opzeggen, maar het gevoel van verlies van de voorbije betaling houdt je tegen.',
+        used: ['Hidden costs / Drip pricing', 'Hard to cancel / Roach motel', 'Forced action']
+      },
+      'hick': {
+        num: '#1', name: "Hick's Law",
+        oneliner: 'Meer opties leidt tot moeilijkere en tragere beslissingen.',
+        desc: 'Hick & Hyman (1952): de reactietijd stijgt logaritmisch met het aantal opties. In deceptive patterns wordt dit principe omgekeerd ingezet: opt-out processen krijgen maximaal veel stappen en keuzes, zodat de gebruiker afhaakt. Het Iliad Flow van Amazon (6 klikken, 15 opties) is het schoolvoorbeeld van Hick\'s Law als obstructiestrategie.',
+        used: ['Hidden costs / Drip pricing', 'Comparison prevention', 'Hard to cancel / Roach motel']
+      },
+      'selective-attention': {
+        num: '#14', name: 'Selective Attention',
+        oneliner: 'Mensen filteren automatisch wat ze zien — en missen daardoor wat verborgen is.',
+        desc: 'Wanneer gebruikers gefocust zijn op een taak (een product vinden, afrekenen), filteren ze actief alles wat niet direct relevant lijkt. Sneaking maakt hier gebruik van door pertinente informatie — zoals auto-renewal clausules of extra kosten — te plaatsen buiten de aandachtsfocus, in kleine letters of op een onverwachte plek.',
+        used: ['Sneaking']
+      },
+      'cognitive-load': {
+        num: '#4', name: 'Cognitive Load',
+        oneliner: 'De totale mentale inspanning die nodig is om een taak te voltooien.',
+        desc: 'Sweller (1988): de totale mentale inspanning die nodig is om een taak te voltooien. Deceptive patterns verhogen bewust de cognitieve belasting op cruciale momenten — zoals bij opt-out of bij het lezen van voorwaarden — zodat de gebruiker stopt met kritisch nadenken en de makkelijkste (meest winstgevende) optie kiest.',
+        used: ['Sneaking', 'Trick wording', 'Obstruction']
+      },
+      'banner-blindness': {
+        num: '#16', name: 'Banner Blindness',
+        oneliner: 'Gebruikers negeren herhaald terugkerende elementen — ook als die relevant zijn.',
+        desc: 'Benway & Lane (1998): gebruikers leren herhalende of perifere elementen te negeren. Sneaking en disguised ads profiteren hiervan: informatie in de footer, in licht grijs, of naast een bekende UI-positie wordt automatisch gescand maar niet verwerkt. Het omgekeerde effect — iets dat eruitziet als een ad maar het niet is — werkt ook: banner blindness betekent dat je nooit op "advertentie"-achtige elementen klikt, zelfs als ze nuttig zijn.',
+        used: ['Sneaking', 'Disguised ads']
+      },
+      'cognitive-dissonance': {
+        num: '#50', name: 'Cognitive Dissonance',
+        oneliner: 'Twee tegenstrijdige ideeën tegelijk vasthouden is pijnlijk — mensen lossen dit snel op.',
+        desc: 'Festinger (1957): de psychologische spanning bij het vasthouden van twee conflicterende overtuigingen. Trick wording creëert bewust verwarring — een dubbele negatie, een verwarrend label — zodat de gebruiker de spanning snel wil oplossen door de makkelijkste interpretatie te volgen (vaak de voor het bedrijf voordelige keuze).',
+        used: ['Trick wording']
+      },
+      'priming': {
+        num: '#3', name: 'Priming',
+        oneliner: 'Eerdere prikkels beïnvloeden onbewust latere beslissingen.',
+        desc: 'Kahneman (2011): blootstelling aan een stimulus beïnvloedt hoe we reageren op een volgende stimulus, zonder dat we ons daar bewust van zijn. Disguised ads en trick wording maken gebruik van priming: de taal, kleur of context van een element activeert bepaalde associaties die de beslissing sturen nog voordat Systeem 2 betrokken is.',
+        used: ['Trick wording', 'Disguised ads']
+      },
+      'visual-hierarchy': {
+        num: '#13', name: 'Visual Hierarchy',
+        oneliner: 'De volgorde waarin mensen visuele elementen waarnemen wordt bepaald door grootte, contrast en positie.',
+        desc: 'Gestalt-principes en oogbeweging-onderzoek tonen dat gebruikers schermen scannen in voorspelbare patronen (F-patroon, Z-patroon). Visual interference manipuleert deze hiërarchie: belangrijke informatie (kosten, voorwaarden) krijgt weinig visueel gewicht, terwijl afleidende elementen visueel dominant zijn.',
+        used: ['Visual interference']
+      },
+      'von-restorff': {
+        num: '#12', name: 'Von Restorff Effect',
+        oneliner: 'Mensen onthouden wat opvalt — het afwijkende trekt automatisch aandacht.',
+        desc: 'Von Restorff (1933): items die zich onderscheiden van de omgeving worden beter herinnerd en eerder opgemerkt. Visual interference draait dit om: door de opt-out optie visueel gelijkvormig te maken met de achtergrond (weinig contrast, kleine tekst), valt ze niet op. De gewenste (winstgevende) optie krijgt juist visueel gewicht via kleur, grootte of animatie.',
+        used: ['Visual interference']
+      },
+      'contrast': {
+        num: '#19', name: 'Contrast',
+        oneliner: 'Aandacht gaat automatisch naar elementen met het hoogste visuele gewicht.',
+        desc: 'Visueel contrast — in kleur, grootte, typografie of witruimte — bepaalt wat de gebruiker als eerste ziet en verwerkt. Deceptive patterns manipuleren contrast bewust: een opvallende CTA-knop voor de gewenste actie, een nauwelijks zichtbare link voor de alternatieve keuze. De informatie is er, maar het contrast zorgt ervoor dat ze niet geregistreerd wordt.',
+        used: ['Visual interference']
+      },
+      'mental-model': {
+        num: '#33', name: 'Mental Model',
+        oneliner: 'Gebruikers hebben een vooraf gevormde verwachting van hoe dingen werken.',
+        desc: 'Norman (1988): gebruikers interpreteren interfaces op basis van eerdere ervaringen. Disguised ads exploiteren dit: een element dat eruitziet als een zoekresultaat of redactionele content activeert het mentale model "dit is objectieve informatie", waardoor de gebruiker er vertrouwen aan schenkt zonder het te evalueren als reclame.',
+        used: ['Disguised ads']
+      },
+      'decision-fatigue': {
+        num: '#68', name: 'Decision Fatigue',
+        oneliner: 'Veel beslissingen nemen achter elkaar verlaagt de kwaliteit van latere beslissingen.',
+        desc: 'Baumeister et al. (1998): wilskracht en beslissingsvermogen zijn uitputbare cognitieve bronnen. Checkout-processen en opt-out flows worden bewust lang gemaakt om decision fatigue te induceren — tegen het einde van het proces kiest de gebruiker de makkelijkste optie of geeft hij het op.',
+        used: ['Comparison prevention', 'Fake urgency', 'Nagging', 'Obstruction']
+      },
+      'scarcity': {
+        num: '#31', name: 'Scarcity',
+        oneliner: 'Mensen hechten meer waarde aan dingen die schaars zijn of lijken.',
+        desc: 'Cialdini (1984): schaarste vergroot de waargenomen waarde van een object of aanbieding. "Nog 2 op voorraad" — ook als dat niet klopt — activeert onmiddellijk een sterkere motivatie om te handelen. In combinatie met Loss Aversion (het verlies van de kans wordt sterker gevoeld dan de winst van de aankoop) is dit een van de krachtigste manipulatieve technieken.',
+        used: ['Fake scarcity']
+      },
+      'loss-aversion': {
+        num: '#65', name: 'Loss Aversion',
+        oneliner: 'Verliezen voelen twee keer zo zwaar aan als equivalente winsten.',
+        desc: 'Kahneman & Tversky (1979): de pijn van een verlies is psychologisch zwaarder dan het plezier van een equivalente winst. Fake urgency, fake scarcity en confirmshaming activeren allemaal loss aversion: de gebruiker handelt niet vanuit een positieve motivatie maar vanuit de angst om iets te verliezen — een korting, een beschikbaarheid, een voordeel.',
+        used: ['Fake scarcity', 'Fake urgency', 'Confirmshaming']
+      },
+      'hyperbolic': {
+        num: '#77', name: 'Hyperbolic Discounting',
+        oneliner: 'Mensen prefereren onmiddellijke beloningen boven grotere toekomstige voordelen.',
+        desc: 'Ainslie (1975): de subjectieve waarde van een beloning neemt niet lineair maar hyperbolisch af naarmate de beloning verder in de toekomst ligt. Fake urgency en countdown-timers maken gebruik van dit principe: de korting nu voelt urgenter dan de rationele overweging later. De gebruiker handelt vanuit de directe prikkel, niet vanuit lange-termijn-redenering.',
+        used: ['Fake scarcity', 'Fake urgency']
+      },
+      'social-proof': {
+        num: '#30', name: 'Social Proof',
+        oneliner: 'Gebruikers passen hun gedrag aan op basis van wat anderen doen.',
+        desc: 'Cialdini (1984): in situaties van onzekerheid kijken mensen naar het gedrag van anderen als informatiesignaal. "Most common: 2 months", "4.8 sterren (12.847 reviews)", "238 mensen bekijken dit nu" — als die informatie klopt, is het een nudge. Als ze gefabriceerd is, is het fake social proof: een manipulatief gebruik van een reëel en krachtig principe.',
+        used: ['Fake social proof']
+      },
+      'bandwagon': {
+        num: '#85', name: 'Bandwagon Effect',
+        oneliner: 'Gebruikers nemen overtuigingen en gedrag over in verhouding tot hoeveel anderen dat al hebben gedaan.',
+        desc: 'Een specifieke vorm van Social Proof waarbij de meerderheid als norm wordt gepresenteerd. Fake social proof speelt hier direct op in: als iedereen dit product koopt of deze review geeft, moet het wel goed zijn. Het Bandwagon Effect is sterker dan algemene Social Proof omdat het impliceert dat je afwijkend bent als je anders kiest.',
+        used: ['Fake social proof']
+      },
+      'authority': {
+        num: '#42', name: 'Authority Bias',
+        oneliner: 'Gebruikers hechten meer belang aan de mening van een autoriteit.',
+        desc: 'Milgram (1963), Cialdini (1984): mensen volgen sneller instructies en geloven informatie sneller als ze afkomstig lijkt van een autoriteit. Fake reviews van "experts" of gecertificeerde instanties, of nepcitaten van bekende figuren, exploiteren dit principe om onverdiende geloofwaardigheid te creëren.',
+        used: ['Fake social proof']
+      },
+      'default-bias': {
+        num: '#63', name: 'Default Bias',
+        oneliner: 'Gebruikers veranderen een bestaande instelling niet, tenzij er een sterke reden is.',
+        desc: 'Samuelson & Zeckhauser (1988): de neiging om de default te accepteren is een van de sterkste en meest betrouwbare menselijke biases. Pre-selectie en hidden subscriptions bouwen hierop: de meest winstgevende optie staat al aangevinkt (preselection) of de proefperiode loopt automatisch door (forced continuity). De gebruiker moet actief handelen om anders te kiezen — en dat doet de meerderheid niet.',
+        used: ['Preselection', 'Hidden subscription / Forced continuity']
+      },
+      'commitment': {
+        num: '#66', name: 'Commitment & Consistency',
+        oneliner: 'Mensen willen consistent zijn met hun eerdere acties en uitspraken.',
+        desc: 'Cialdini (1984): zodra iemand een kleine stap heeft gezet (een gratis trial starten, een account aanmaken), voelt hij druk om consistent te blijven. Forced action gebruikt dit principe om de gebruiker stap voor stap verder te binden. Eenmaal begonnen, is stoppen psychologisch moeilijker — ook als de volgende stap ongewenst is.',
+        used: ['Preselection', 'Hidden subscription / Forced continuity', 'Forced action']
+      },
+      'fitts': {
+        num: '#8', name: "Fitts's Law",
+        oneliner: 'Hoe groter en dichterbij een element, hoe makkelijker en sneller de interactie.',
+        desc: 'Fitts (1954): de tijd om een target te bereiken is afhankelijk van de grootte van het target en de afstand ertoe. In deceptive patterns wordt dit principe omgekeerd ingezet: de opt-in knop is groot en prominent, de opt-out link is klein, ver weg en weinig contrastrijk. Het principe werkt in beide richtingen — het ontwerp bepaalt wat makkelijk is, niet de gebruiker.',
+        used: ['Preselection', 'Hard to cancel / Roach motel']
+      },
+      'empathy-gap': {
+        num: '#10', name: 'Empathy Gap',
+        oneliner: 'Mensen onderschatten hoe sterk emoties hun eigen gedrag beïnvloeden.',
+        desc: 'Loewenstein (2005): mensen in een "koude" emotionele toestand onderschatten systematisch hoe ze zullen reageren in een "warme" toestand (en vice versa). Confirmshaming profiteert hiervan: in het moment van de opt-out activeert de formulering een emotionele reactie (schuldgevoel, schaamte) die de gebruiker niet heeft geanticipeerd.',
+        used: ['Confirmshaming']
+      },
+      'framing': {
+        num: '#23', name: 'Framing',
+        oneliner: 'De manier waarop informatie gepresenteerd wordt, beïnvloedt hoe beslissingen genomen worden.',
+        desc: 'Tversky & Kahneman (1981): exact dezelfde informatie leidt tot andere keuzes afhankelijk van hoe ze wordt gepresenteerd. "90% vetvrij" vs "10% vet" zijn identiek, maar leiden tot andere percepties. Confirmshaming is een extreme vorm van negatief framing: de opt-out wordt geformuleerd als verlies, de opt-in als winst.',
+        used: ['Confirmshaming']
+      },
+      'reactance': {
+        num: '#69', name: 'Reactance',
+        oneliner: 'Gebruikers zijn minder geneigd een gedrag aan te nemen wanneer ze zich gedwongen voelen.',
+        desc: 'Brehm (1966): wanneer mensen het gevoel hebben dat hun vrijheid beperkt wordt, reageren ze met weerstand — ze willen de verloren vrijheid terugherstellen. Nagging en forced action activeren reactance: de gebruiker voelt dat zijn autonomie aangetast wordt en weerstand groeit. Paradoxaal genoeg geven mensen bij nagging toch toe uit vermoeidheid — Decision Fatigue wint het uiteindelijk van Reactance.',
+        used: ['Nagging', 'Forced action']
+      },
+      'variable-reward': {
+        num: '#44', name: 'Variable Reward',
+        oneliner: 'Mensen genieten bijzonder van onverwachte beloningen — variabele bekrachtiging is het sterkst.',
+        desc: 'Skinner (1930s): variabele bekrachtigingsschema\'s zijn het krachtigst in het in stand houden van gedrag. Nagging kan dit principe activeren: af en toe een prompt die wél relevante informatie bevat, houdt de gebruiker alert en minder zeker dat hij alle prompts veilig kan negeren.',
+        used: ['Nagging']
+      },
+      'investment': {
+        num: '#64', name: 'Investment Loops',
+        oneliner: 'Wanneer gebruikers zichzelf investeren, komen ze eerder terug — en blijven ze langer.',
+        desc: 'Nir Eyal (2014): naarmate gebruikers meer investeren in een product (data, tijd, connecties, gewoontes), wordt de drempel om te stoppen hoger. Hidden subscriptions profiteren hiervan: tegen de tijd dat een gratis proefperiode eindigt, heeft de gebruiker al data, voorkeuren en gewoontes opgebouwd die moeilijk te laten gaan zijn.',
+        used: ['Hidden subscription / Forced continuity']
+      },
+      'goal-gradient': {
+        num: '#51', name: 'Goal Gradient Effect',
+        oneliner: 'Motivatie stijgt naarmate gebruikers dichter bij hun doel komen.',
+        desc: 'Hull (1934): mensen versnellen hun inspanning naarmate ze dichter bij een doel komen. In deceptive patterns wordt dit omgekeerd ingezet bij obstruction: het opzegproces wordt zo ontworpen dat de gebruiker nooit het gevoel krijgt dicht bij de voltooiing te zijn — er is altijd nog een stap, nog een aanbieding, nog een bevestigingsvraag.',
+        used: ['Obstruction']
+      }
+    };
 
-  <div class="pattern-card" data-cat="mislead" data-text="visual interference visuele verstoring visual hierarchy von restorff contrast camouflage">
-    <div class="p-name"><span class="cat-dot dot-mislead"></span>Visual interference</div>
-    <div class="p-def">Informatie wordt visueel verborgen, gecamoufleerd of vervormd in de layout zodat de gebruiker het over het hoofd ziet.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="visual-hierarchy"><span class="ptag-num">#13</span> Visual Hierarchy</span>
-      <span class="ptag" data-principle="von-restorff"><span class="ptag-num">#12</span> Von Restorff Effect</span>
-      <span class="ptag" data-principle="contrast"><span class="ptag-num">#19</span> Contrast</span>
-    </div>
-  </div>
+    // Filter & Search
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.pattern-card');
+    const searchInput = document.getElementById('search');
+    const noResults = document.getElementById('no-results');
 
-  <div class="pattern-card" data-cat="mislead" data-text="disguised ads verkapte reclame banner blindness mental model priming">
-    <div class="p-name"><span class="cat-dot dot-mislead"></span>Disguised ads</div>
-    <div class="p-def">Reclame ziet eruit als een interface-element of organische content, zodat de gebruiker er onbewust op klikt.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="banner-blindness"><span class="ptag-num">#16</span> Banner Blindness</span>
-      <span class="ptag" data-principle="mental-model"><span class="ptag-num">#33</span> Mental Model</span>
-      <span class="ptag" data-principle="priming"><span class="ptag-num">#3</span> Priming</span>
-    </div>
-  </div>
+    let activeFilter = 'all';
+    let searchQuery = '';
 
-  <div class="pattern-card" data-cat="mislead" data-text="comparison prevention vergelijken onmogelijk hick decision fatigue anchoring">
-    <div class="p-name"><span class="cat-dot dot-mislead"></span>Comparison prevention</div>
-    <div class="p-def">Prijzen en features worden zo verpakt dat eerlijk vergelijken onmogelijk wordt — de gebruiker kan geen weloverwogen keuze maken.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="hick"><span class="ptag-num">#1</span> Hick's Law</span>
-      <span class="ptag" data-principle="decision-fatigue"><span class="ptag-num">#68</span> Decision Fatigue</span>
-      <span class="ptag" data-principle="anchoring"><span class="ptag-num">#5</span> Anchoring Bias</span>
-    </div>
-  </div>
-</section>
+    function updateVisibility() {
+      let visible = 0;
+      cards.forEach(card => {
+        const cat = card.dataset.cat;
+        const text = (card.dataset.text + ' ' + card.innerText).toLowerCase();
+        const matchFilter = activeFilter === 'all' || cat === activeFilter;
+        const matchSearch = searchQuery === '' || text.includes(searchQuery);
+        if (matchFilter && matchSearch) {
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
 
-<!-- MANIPULEREN -->
-<section class="cat-section" data-cat="manip">
-  <div class="cat-title">
-    <span class="cat-label" style="background:var(--manip-bg);color:var(--manip);border:1px solid var(--manip-border);">Manipuleren</span>
-    <span class="cat-desc">Feiten kloppen, maar de presentatie stuurt via biases en emotie</span>
-  </div>
-  <div class="table-head">
-    <span class="th">Patroon</span>
-    <span class="th">Wat het doet</span>
-    <span class="th">Psychologisch principe</span>
-  </div>
+      // Hide/show category sections
+      document.querySelectorAll('.cat-section').forEach(section => {
+        const catCards = section.querySelectorAll('.pattern-card:not(.hidden)');
+        section.style.display = catCards.length === 0 ? 'none' : '';
+      });
 
-  <div class="pattern-card" data-cat="manip" data-text="fake scarcity nepschaarsheid scarcity loss aversion hyperbolic discounting">
-    <div class="p-name"><span class="cat-dot dot-manip"></span>Fake scarcity</div>
-    <div class="p-def">Een nepindicatie van beperkte voorraad of populariteit zet de gebruiker onder druk om snel te beslissen.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="scarcity"><span class="ptag-num">#31</span> Scarcity</span>
-      <span class="ptag" data-principle="loss-aversion"><span class="ptag-num">#65</span> Loss Aversion</span>
-      <span class="ptag" data-principle="hyperbolic"><span class="ptag-num">#77</span> Hyperbolic Discounting</span>
-    </div>
-  </div>
-
-  <div class="pattern-card" data-cat="manip" data-text="fake urgency nep countdown tijdsdruk loss aversion hyperbolic decision fatigue">
-    <div class="p-name"><span class="cat-dot dot-manip"></span>Fake urgency</div>
-    <div class="p-def">Een nepcountdown of tijdsbeperking dwingt de gebruiker tot een snelle beslissing die hij bij meer tijd niet zou nemen.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="loss-aversion"><span class="ptag-num">#65</span> Loss Aversion</span>
-      <span class="ptag" data-principle="hyperbolic"><span class="ptag-num">#77</span> Hyperbolic Discounting</span>
-      <span class="ptag" data-principle="decision-fatigue"><span class="ptag-num">#68</span> Decision Fatigue</span>
-    </div>
-  </div>
-
-  <div class="pattern-card" data-cat="manip" data-text="fake social proof nep reviews social proof bandwagon authority bias">
-    <div class="p-name"><span class="cat-dot dot-manip"></span>Fake social proof</div>
-    <div class="p-def">Nepreviews, fabricated testimonials of activiteitsmeldingen misleiden de gebruiker over de echte populariteit of kwaliteit.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="social-proof"><span class="ptag-num">#30</span> Social Proof</span>
-      <span class="ptag" data-principle="bandwagon"><span class="ptag-num">#85</span> Bandwagon Effect</span>
-      <span class="ptag" data-principle="authority"><span class="ptag-num">#42</span> Authority Bias</span>
-    </div>
-  </div>
-
-  <div class="pattern-card" data-cat="manip" data-text="preselection voorgeselecteerd default bias commitment fitts">
-    <div class="p-name"><span class="cat-dot dot-manip"></span>Preselection</div>
-    <div class="p-def">De meest winstgevende optie staat al aangevinkt bij het laden van de pagina — de gebruiker moet actief iets veranderen om anders te kiezen.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="default-bias"><span class="ptag-num">#63</span> Default Bias</span>
-      <span class="ptag" data-principle="commitment"><span class="ptag-num">#66</span> Commitment & Consistency</span>
-      <span class="ptag" data-principle="fitts"><span class="ptag-num">#8</span> Fitts's Law</span>
-    </div>
-  </div>
-
-  <div class="pattern-card" data-cat="manip" data-text="confirmshaming schuldgevoel opt-out loss aversion empathy gap framing">
-    <div class="p-name"><span class="cat-dot dot-manip"></span>Confirmshaming</div>
-    <div class="p-def">De opt-out knop is geformuleerd als zelfkritiek of verlies — "Nee, ik wil geen korting" — zodat de gebruiker zich schuldig voelt bij een legitieme keuze.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="loss-aversion"><span class="ptag-num">#65</span> Loss Aversion</span>
-      <span class="ptag" data-principle="empathy-gap"><span class="ptag-num">#10</span> Empathy Gap</span>
-      <span class="ptag" data-principle="framing"><span class="ptag-num">#23</span> Framing</span>
-    </div>
-  </div>
-
-  <div class="pattern-card" data-cat="manip" data-text="nagging herhaalde prompts onderbreken reactance decision fatigue variable reward">
-    <div class="p-name"><span class="cat-dot dot-manip"></span>Nagging</div>
-    <div class="p-def">Herhaalde, opdringerige prompts onderbreken de taak van de gebruiker totdat hij uit vermoeidheid toegeeft.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="reactance"><span class="ptag-num">#69</span> Reactance</span>
-      <span class="ptag" data-principle="decision-fatigue"><span class="ptag-num">#68</span> Decision Fatigue</span>
-      <span class="ptag" data-principle="variable-reward"><span class="ptag-num">#44</span> Variable Reward</span>
-    </div>
-  </div>
-</section>
-
-<!-- OBSTRUEREN -->
-<section class="cat-section" data-cat="obstruct">
-  <div class="cat-title">
-    <span class="cat-label" style="background:var(--obstruct-bg);color:var(--obstruct);border:1px solid var(--obstruct-border);">Obstrueren</span>
-    <span class="cat-desc">Makkelijk in, bewust moeilijk uit</span>
-  </div>
-  <div class="table-head">
-    <span class="th">Patroon</span>
-    <span class="th">Wat het doet</span>
-    <span class="th">Psychologisch principe</span>
-  </div>
-
-  <div class="pattern-card" data-cat="obstruct" data-text="roach motel hard to cancel opzeggen sunk cost fitts hick obstruction">
-    <div class="p-name"><span class="cat-dot dot-obstruct"></span>Hard to cancel / Roach motel</div>
-    <div class="p-def">Inschrijven kost 2 klikken, opzeggen is een hindernisbaan van meerdere stappen, afleiding en retention-aanbiedingen.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="sunk-cost"><span class="ptag-num">#67</span> Sunk Cost Effect</span>
-      <span class="ptag inverted" data-principle="fitts"><span class="ptag-num">#8</span> Fitts's Law ↩</span>
-      <span class="ptag inverted" data-principle="hick"><span class="ptag-num">#1</span> Hick's Law ↩</span>
-    </div>
-  </div>
-
-  <div class="pattern-card" data-cat="obstruct" data-text="hidden subscription forced continuity gratis trial betalend default bias investment commitment">
-    <div class="p-name"><span class="cat-dot dot-obstruct"></span>Hidden subscription / Forced continuity</div>
-    <div class="p-def">Een gratis proefperiode loopt stilletjes over in een betalend abonnement — zonder herinnering, zonder expliciete toestemming.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="default-bias"><span class="ptag-num">#63</span> Default Bias</span>
-      <span class="ptag" data-principle="investment"><span class="ptag-num">#64</span> Investment Loops</span>
-      <span class="ptag" data-principle="commitment"><span class="ptag-num">#66</span> Commitment & Consistency</span>
-    </div>
-  </div>
-
-  <div class="pattern-card" data-cat="obstruct" data-text="obstruction barrières extra stappen cognitive load decision fatigue goal gradient">
-    <div class="p-name"><span class="cat-dot dot-obstruct"></span>Obstruction</div>
-    <div class="p-def">Barrières en extra stappen maken het moeilijk om informatie op te vragen, instellingen te wijzigen of je account op te zeggen.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="cognitive-load"><span class="ptag-num">#4</span> Cognitive Load</span>
-      <span class="ptag" data-principle="decision-fatigue"><span class="ptag-num">#68</span> Decision Fatigue</span>
-      <span class="ptag inverted" data-principle="goal-gradient"><span class="ptag-num">#51</span> Goal Gradient ↩</span>
-    </div>
-  </div>
-
-  <div class="pattern-card" data-cat="obstruct" data-text="forced action gedwongen actie reactance commitment sunk cost">
-    <div class="p-name"><span class="cat-dot dot-obstruct"></span>Forced action</div>
-    <div class="p-def">Om het eigenlijke doel te bereiken moet de gebruiker iets ongewensts doen — een account aanmaken, data delen of een nieuwsbrief accepteren.</div>
-    <div class="principles-col">
-      <span class="ptag" data-principle="reactance"><span class="ptag-num">#69</span> Reactance</span>
-      <span class="ptag" data-principle="commitment"><span class="ptag-num">#66</span> Commitment & Consistency</span>
-      <span class="ptag" data-principle="sunk-cost"><span class="ptag-num">#67</span> Sunk Cost Effect</span>
-    </div>
-  </div>
-</section>
-
-<div class="no-results" id="no-results">Geen patronen gevonden voor deze zoekopdracht.</div>
-
-</main>
-
-<!-- TOOLTIP OVERLAY -->
-<div class="tooltip-overlay" id="overlay" onclick="closeTooltip(event)">
-  <div class="tooltip-box" id="tooltip-box">
-    <button class="tooltip-close" onclick="closeOverlay()">✕</button>
-    <div class="tooltip-num" id="tt-num"></div>
-    <div class="tooltip-name" id="tt-name"></div>
-    <div class="tooltip-oneliner" id="tt-oneliner"></div>
-    <div class="tooltip-desc" id="tt-desc"></div>
-    <div class="tooltip-used-in">Toegepast in</div>
-    <div class="used-in-tags" id="tt-used-in"></div>
-  </div>
-</div>
-
-<script>
-const PRINCIPLES = {
-  'anchoring': {
-    num: '#5', name: 'Anchoring Bias',
-    oneliner: 'Het eerste getal dat je ziet bepaalt hoe je alle volgende beoordeelt.',
-    desc: 'Tversky & Kahneman (1974) toonden aan dat mensen zich sterk laten beïnvloeden door het eerste stuk informatie dat ze zien — het "anker". Een hoge originele prijs maakt een lagere prijs automatisch aantrekkelijk, zelfs als de korting kunstmatig is. Systeem 1 vergelijkt snel en relatief; Systeem 2 zou de absolute vraag stellen: heb ik dit nodig?',
-    used: ['Hidden costs / Drip pricing', 'Comparison prevention']
-  },
-  'sunk-cost': {
-    num: '#67', name: 'Sunk Cost Effect',
-    oneliner: 'Je blijft investeren omdat je al zoveel geïnvesteerd hebt — ook als stoppen rationeler is.',
-    desc: 'Mensen zijn reluctant om iets op te geven waarin ze al tijd, geld of energie hebben gestoken. Drip pricing maakt gebruik van dit effect: tegen de tijd dat je de echte prijs ziet, heb je al te veel in het aankoopproces geïnvesteerd om terug te keren. Ook Roach Motel activeert dit — je betaalt al maanden voor een abonnement dat je wil opzeggen, maar het gevoel van verlies van de voorbije betaling houdt je tegen.',
-    used: ['Hidden costs / Drip pricing', 'Hard to cancel / Roach motel', 'Forced action']
-  },
-  'hick': {
-    num: '#1', name: "Hick's Law",
-    oneliner: 'Meer opties leidt tot moeilijkere en tragere beslissingen.',
-    desc: 'Hick & Hyman (1952): de reactietijd stijgt logaritmisch met het aantal opties. In deceptive patterns wordt dit principe omgekeerd ingezet: opt-out processen krijgen maximaal veel stappen en keuzes, zodat de gebruiker afhaakt. Het Iliad Flow van Amazon (6 klikken, 15 opties) is het schoolvoorbeeld van Hick\'s Law als obstructiestrategie.',
-    used: ['Hidden costs / Drip pricing', 'Comparison prevention', 'Hard to cancel / Roach motel']
-  },
-  'selective-attention': {
-    num: '#14', name: 'Selective Attention',
-    oneliner: 'Mensen filteren automatisch wat ze zien — en missen daardoor wat verborgen is.',
-    desc: 'Wanneer gebruikers gefocust zijn op een taak (een product vinden, afrekenen), filteren ze actief alles wat niet direct relevant lijkt. Sneaking maakt hier gebruik van door pertinente informatie — zoals auto-renewal clausules of extra kosten — te plaatsen buiten de aandachtsfocus, in kleine letters of op een onverwachte plek.',
-    used: ['Sneaking']
-  },
-  'cognitive-load': {
-    num: '#4', name: 'Cognitive Load',
-    oneliner: 'Mentale overbelasting zorgt ervoor dat mensen ophouden na te denken en op automatische piloot handelen.',
-    desc: 'Sweller (1988): de totale mentale inspanning die nodig is om een taak te voltooien. Deceptive patterns verhogen bewust de cognitieve belasting op cruciale momenten — zoals bij opt-out of bij het lezen van voorwaarden — zodat de gebruiker stopt met kritisch nadenken en de makkelijkste (meest winstgevende) optie kiest.',
-    used: ['Sneaking', 'Trick wording', 'Obstruction']
-  },
-  'banner-blindness': {
-    num: '#16', name: 'Banner Blindness',
-    oneliner: 'Gebruikers negeren herhaald terugkerende elementen — ook als die relevant zijn.',
-    desc: 'Benway & Lane (1998): gebruikers leren herhalende of perifere elementen te negeren. Sneaking en disguised ads profiteren hiervan: informatie in de footer, in licht grijs, of naast een bekende UI-positie wordt automatisch gescand maar niet verwerkt. Het omgekeerde effect — iets dat eruitziet als een ad maar het niet is — werkt ook: banner blindness betekent dat je nooit op "advertentie"-achtige elementen klikt, zelfs als ze nuttig zijn.',
-    used: ['Sneaking', 'Disguised ads']
-  },
-  'cognitive-dissonance': {
-    num: '#50', name: 'Cognitive Dissonance',
-    oneliner: 'Twee tegenstrijdige ideeën tegelijk vasthouden is pijnlijk — mensen lossen dit snel op.',
-    desc: 'Festinger (1957): de psychologische spanning bij het vasthouden van twee conflicterende overtuigingen. Trick wording creëert bewust verwarring — een dubbele negatie, een verwarrend label — zodat de gebruiker de spanning snel wil oplossen door de makkelijkste interpretatie te volgen (vaak de voor het bedrijf voordelige keuze).',
-    used: ['Trick wording']
-  },
-  'priming': {
-    num: '#3', name: 'Priming',
-    oneliner: 'Eerdere prikkels beïnvloeden onbewust latere beslissingen.',
-    desc: 'Kahneman (2011): blootstelling aan een stimulus beïnvloedt hoe we reageren op een volgende stimulus, zonder dat we ons daar bewust van zijn. Disguised ads en trick wording maken gebruik van priming: de taal, kleur of context van een element activeert bepaalde associaties die de beslissing sturen nog voordat Systeem 2 betrokken is.',
-    used: ['Trick wording', 'Disguised ads']
-  },
-  'visual-hierarchy': {
-    num: '#13', name: 'Visual Hierarchy',
-    oneliner: 'De volgorde waarin mensen visuele elementen waarnemen wordt bepaald door grootte, contrast en positie.',
-    desc: 'Gestalt-principes en oogbeweging-onderzoek tonen dat gebruikers schermen scannen in voorspelbare patronen (F-patroon, Z-patroon). Visual interference manipuleert deze hiërarchie: belangrijke informatie (kosten, voorwaarden) krijgt weinig visueel gewicht, terwijl afleidende elementen visueel dominant zijn.',
-    used: ['Visual interference']
-  },
-  'von-restorff': {
-    num: '#12', name: 'Von Restorff Effect',
-    oneliner: 'Mensen onthouden wat opvalt — het afwijkende trekt automatisch aandacht.',
-    desc: 'Von Restorff (1933): items die zich onderscheiden van de omgeving worden beter herinnerd en eerder opgemerkt. Visual interference draait dit om: door de opt-out optie visueel gelijkvormig te maken met de achtergrond (weinig contrast, kleine tekst), valt ze niet op. De gewenste (winstgevende) optie krijgt juist visueel gewicht via kleur, grootte of animatie.',
-    used: ['Visual interference']
-  },
-  'contrast': {
-    num: '#19', name: 'Contrast',
-    oneliner: 'Aandacht gaat automatisch naar elementen met het hoogste visuele gewicht.',
-    desc: 'Visueel contrast — in kleur, grootte, typografie of witruimte — bepaalt wat de gebruiker als eerste ziet en verwerkt. Deceptive patterns manipuleren contrast bewust: een opvallende CTA-knop voor de gewenste actie, een nauwelijks zichtbare link voor de alternatieve keuze. De informatie is er, maar het contrast zorgt ervoor dat ze niet geregistreerd wordt.',
-    used: ['Visual interference']
-  },
-  'mental-model': {
-    num: '#33', name: 'Mental Model',
-    oneliner: 'Gebruikers hebben een vooraf gevormde verwachting van hoe dingen werken.',
-    desc: 'Norman (1988): gebruikers interpreteren interfaces op basis van eerdere ervaringen. Disguised ads exploiteren dit: een element dat eruitziet als een zoekresultaat of redactionele content activeert het mentale model "dit is objectieve informatie", waardoor de gebruiker er vertrouwen aan schenkt zonder het te evalueren als reclame.',
-    used: ['Disguised ads']
-  },
-  'decision-fatigue': {
-    num: '#68', name: 'Decision Fatigue',
-    oneliner: 'Veel beslissingen nemen achter elkaar verlaagt de kwaliteit van latere beslissingen.',
-    desc: 'Baumeister et al. (1998): wilskracht en beslissingsvermogen zijn uitputbare cognitieve bronnen. Checkout-processen en opt-out flows worden bewust lang gemaakt om decision fatigue te induceren — tegen het einde van het proces kiest de gebruiker de makkelijkste optie of geeft hij het op.',
-    used: ['Comparison prevention', 'Fake urgency', 'Nagging', 'Obstruction']
-  },
-  'scarcity': {
-    num: '#31', name: 'Scarcity',
-    oneliner: 'Mensen hechten meer waarde aan dingen die schaars zijn of lijken.',
-    desc: 'Cialdini (1984): schaarste vergroot de waargenomen waarde van een object of aanbieding. "Nog 2 op voorraad" — ook als dat niet klopt — activeert onmiddellijk een sterkere motivatie om te handelen. In combinatie met Loss Aversion (het verlies van de kans wordt sterker gevoeld dan de winst van de aankoop) is dit een van de krachtigste manipulatieve technieken.',
-    used: ['Fake scarcity']
-  },
-  'loss-aversion': {
-    num: '#65', name: 'Loss Aversion',
-    oneliner: 'Verliezen voelen twee keer zo zwaar aan als equivalente winsten.',
-    desc: 'Kahneman & Tversky (1979): de pijn van een verlies is psychologisch zwaarder dan het plezier van een equivalente winst. Fake urgency, fake scarcity en confirmshaming activeren allemaal loss aversion: de gebruiker handelt niet vanuit een positieve motivatie maar vanuit de angst om iets te verliezen — een korting, een beschikbaarheid, een voordeel.',
-    used: ['Fake scarcity', 'Fake urgency', 'Confirmshaming']
-  },
-  'hyperbolic': {
-    num: '#77', name: 'Hyperbolic Discounting',
-    oneliner: 'Mensen prefereren onmiddellijke beloningen boven grotere toekomstige voordelen.',
-    desc: 'Ainslie (1975): de subjectieve waarde van een beloning neemt niet lineair maar hyperbolisch af naarmate de beloning verder in de toekomst ligt. Fake urgency en countdown-timers maken gebruik van dit principe: de korting nu voelt urgenter dan de rationele overweging later. De gebruiker handelt vanuit de directe prikkel, niet vanuit lange-termijn-redenering.',
-    used: ['Fake scarcity', 'Fake urgency']
-  },
-  'social-proof': {
-    num: '#30', name: 'Social Proof',
-    oneliner: 'Gebruikers passen hun gedrag aan op basis van wat anderen doen.',
-    desc: 'Cialdini (1984): in situaties van onzekerheid kijken mensen naar het gedrag van anderen als informatiesignaal. "Most common: 2 months", "4.8 sterren (12.847 reviews)", "238 mensen bekijken dit nu" — als die informatie klopt, is het een nudge. Als ze gefabriceerd is, is het fake social proof: een manipulatief gebruik van een reëel en krachtig principe.',
-    used: ['Fake social proof']
-  },
-  'bandwagon': {
-    num: '#85', name: 'Bandwagon Effect',
-    oneliner: 'Gebruikers nemen overtuigingen en gedrag over in verhouding tot hoeveel anderen dat al hebben gedaan.',
-    desc: 'Een specifieke vorm van Social Proof waarbij de meerderheid als norm wordt gepresenteerd. Fake social proof speelt hier direct op in: als iedereen dit product koopt of deze review geeft, moet het wel goed zijn. Het Bandwagon Effect is sterker dan algemene Social Proof omdat het impliceert dat je afwijkend bent als je anders kiest.',
-    used: ['Fake social proof']
-  },
-  'authority': {
-    num: '#42', name: 'Authority Bias',
-    oneliner: 'Gebruikers hechten meer belang aan de mening van een autoriteit.',
-    desc: 'Milgram (1963), Cialdini (1984): mensen volgen sneller instructies en geloven informatie sneller als ze afkomstig lijkt van een autoriteit. Fake reviews van "experts" of gecertificeerde instanties, of nepcitaten van bekende figuren, exploiteren dit principe om onverdiende geloofwaardigheid te creëren.',
-    used: ['Fake social proof']
-  },
-  'default-bias': {
-    num: '#63', name: 'Default Bias',
-    oneliner: 'Gebruikers veranderen een bestaande instelling niet, tenzij er een sterke reden is.',
-    desc: 'Samuelson & Zeckhauser (1988): de neiging om de default te accepteren is een van de sterkste en meest betrouwbare menselijke biases. Pre-selectie en hidden subscriptions bouwen hierop: de meest winstgevende optie staat al aangevinkt (preselection) of de proefperiode loopt automatisch door (forced continuity). De gebruiker moet actief handelen om anders te kiezen — en dat doet de meerderheid niet.',
-    used: ['Preselection', 'Hidden subscription / Forced continuity']
-  },
-  'commitment': {
-    num: '#66', name: 'Commitment & Consistency',
-    oneliner: 'Mensen willen consistent zijn met hun eerdere acties en uitspraken.',
-    desc: 'Cialdini (1984): zodra iemand een kleine stap heeft gezet (een gratis trial starten, een account aanmaken), voelt hij druk om consistent te blijven. Forced action gebruikt dit principe om de gebruiker stap voor stap verder te binden. Eenmaal begonnen, is stoppen psychologisch moeilijker — ook als de volgende stap ongewenst is.',
-    used: ['Preselection', 'Hidden subscription / Forced continuity', 'Forced action']
-  },
-  'fitts': {
-    num: '#8', name: "Fitts's Law",
-    oneliner: 'Hoe groter en dichterbij een element, hoe makkelijker en sneller de interactie.',
-    desc: 'Fitts (1954): de tijd om een target te bereiken is afhankelijk van de grootte van het target en de afstand ertoe. In deceptive patterns wordt dit principe omgekeerd ingezet: de opt-in knop is groot en prominent, de opt-out link is klein, ver weg en weinig contrastrijk. Het principe werkt in beide richtingen — het ontwerp bepaalt wat makkelijk is, niet de gebruiker.',
-    used: ['Preselection', 'Hard to cancel / Roach motel']
-  },
-  'empathy-gap': {
-    num: '#10', name: 'Empathy Gap',
-    oneliner: 'Mensen onderschatten hoe sterk emoties hun eigen gedrag beïnvloeden.',
-    desc: 'Loewenstein (2005): mensen in een "koude" emotionele toestand onderschatten systematisch hoe ze zullen reageren in een "warme" toestand (en vice versa). Confirmshaming profiteert hiervan: in het moment van de opt-out activeert de formulering een emotionele reactie (schuldgevoel, schaamte) die de gebruiker niet heeft geanticipeerd.',
-    used: ['Confirmshaming']
-  },
-  'framing': {
-    num: '#23', name: 'Framing',
-    oneliner: 'De manier waarop informatie gepresenteerd wordt, beïnvloedt hoe beslissingen genomen worden.',
-    desc: 'Tversky & Kahneman (1981): exact dezelfde informatie leidt tot andere keuzes afhankelijk van hoe ze wordt gepresenteerd. "90% vetvrij" vs "10% vet" zijn identiek, maar leiden tot andere percepties. Confirmshaming is een extreme vorm van negatief framing: de opt-out wordt geformuleerd als verlies, de opt-in als winst.',
-    used: ['Confirmshaming']
-  },
-  'reactance': {
-    num: '#69', name: 'Reactance',
-    oneliner: 'Gebruikers zijn minder geneigd een gedrag aan te nemen wanneer ze zich gedwongen voelen.',
-    desc: 'Brehm (1966): wanneer mensen het gevoel hebben dat hun vrijheid beperkt wordt, reageren ze met weerstand — ze willen de verloren vrijheid terugherstellen. Nagging en forced action activeren reactance: de gebruiker voelt dat zijn autonomie aangetast wordt en weerstand groeit. Paradoxaal genoeg geven mensen bij nagging toch toe uit vermoeidheid — Decision Fatigue wint het uiteindelijk van Reactance.',
-    used: ['Nagging', 'Forced action']
-  },
-  'variable-reward': {
-    num: '#44', name: 'Variable Reward',
-    oneliner: 'Mensen genieten bijzonder van onverwachte beloningen — variabele bekrachtiging is het sterkst.',
-    desc: 'Skinner (1930s): variabele bekrachtigingsschema\'s zijn het krachtigst in het in stand houden van gedrag. Nagging kan dit principe activeren: af en toe een prompt die wél relevante informatie bevat, houdt de gebruiker alert en minder zeker dat hij alle prompts veilig kan negeren.',
-    used: ['Nagging']
-  },
-  'investment': {
-    num: '#64', name: 'Investment Loops',
-    oneliner: 'Wanneer gebruikers zichzelf investeren, komen ze eerder terug — en blijven ze langer.',
-    desc: 'Nir Eyal (2014): naarmate gebruikers meer investeren in een product (data, tijd, connecties, gewoontes), wordt de drempel om te stoppen hoger. Hidden subscriptions profiteren hiervan: tegen de tijd dat een gratis proefperiode eindigt, heeft de gebruiker al data, voorkeuren en gewoontes opgebouwd die moeilijk te laten gaan zijn.',
-    used: ['Hidden subscription / Forced continuity']
-  },
-  'goal-gradient': {
-    num: '#51', name: 'Goal Gradient Effect',
-    oneliner: 'Motivatie stijgt naarmate gebruikers dichter bij hun doel komen.',
-    desc: 'Hull (1934): mensen versnellen hun inspanning naarmate ze dichter bij een doel komen. In deceptive patterns wordt dit omgekeerd ingezet bij obstruction: het opzegproces wordt zo ontworpen dat de gebruiker nooit het gevoel krijgt dicht bij de voltooiing te zijn — er is altijd nog een stap, nog een aanbieding, nog een bevestigingsvraag.',
-    used: ['Obstruction']
-  }
-};
-
-// Filter & Search
-const filterBtns = document.querySelectorAll('.filter-btn');
-const cards = document.querySelectorAll('.pattern-card');
-const searchInput = document.getElementById('search');
-const noResults = document.getElementById('no-results');
-
-let activeFilter = 'all';
-let searchQuery = '';
-
-function updateVisibility() {
-  let visible = 0;
-  cards.forEach(card => {
-    const cat = card.dataset.cat;
-    const text = (card.dataset.text + ' ' + card.innerText).toLowerCase();
-    const matchFilter = activeFilter === 'all' || cat === activeFilter;
-    const matchSearch = searchQuery === '' || text.includes(searchQuery);
-    if (matchFilter && matchSearch) {
-      card.classList.remove('hidden');
-      visible++;
-    } else {
-      card.classList.add('hidden');
+      noResults.style.display = visible === 0 ? 'block' : 'none';
     }
-  });
 
-  // Hide/show category sections
-  document.querySelectorAll('.cat-section').forEach(section => {
-    const catCards = section.querySelectorAll('.pattern-card:not(.hidden)');
-    section.style.display = catCards.length === 0 ? 'none' : '';
-  });
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        updateVisibility();
+      });
+    });
 
-  noResults.style.display = visible === 0 ? 'block' : 'none';
-}
+    searchInput.addEventListener('input', e => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      updateVisibility();
+    });
 
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeFilter = btn.dataset.filter;
-    updateVisibility();
-  });
-});
+    // Tooltip
+    const overlay = document.getElementById('overlay');
 
-searchInput.addEventListener('input', e => {
-  searchQuery = e.target.value.toLowerCase().trim();
-  updateVisibility();
-});
+    document.querySelectorAll('.ptag').forEach(tag => {
+      tag.addEventListener('click', e => {
+        e.stopPropagation();
+        const key = tag.dataset.principle;
+        const p = PRINCIPLES[key];
+        if (!p) return;
 
-// Tooltip
-const overlay = document.getElementById('overlay');
+        document.getElementById('tt-num').textContent = p.num;
+        document.getElementById('tt-name').textContent = p.name;
+        document.getElementById('tt-oneliner').textContent = p.oneliner;
+        document.getElementById('tt-desc').textContent = p.desc;
 
-document.querySelectorAll('.ptag').forEach(tag => {
-  tag.addEventListener('click', e => {
-    e.stopPropagation();
-    const key = tag.dataset.principle;
-    const p = PRINCIPLES[key];
-    if (!p) return;
+        const usedIn = document.getElementById('tt-used-in');
+        usedIn.innerHTML = p.used.map(u => `<span class="used-in-tag">${u}</span>`).join('');
 
-    document.getElementById('tt-num').textContent = p.num;
-    document.getElementById('tt-name').textContent = p.name;
-    document.getElementById('tt-oneliner').textContent = p.oneliner;
-    document.getElementById('tt-desc').textContent = p.desc;
+        overlay.classList.add('open');
+      });
+    });
 
-    const usedIn = document.getElementById('tt-used-in');
-    usedIn.innerHTML = p.used.map(u => `<span class="used-in-tag">${u}</span>`).join('');
+    function closeOverlay() { overlay.classList.remove('open'); }
 
-    overlay.classList.add('open');
-  });
-});
+    function closeTooltip(e) {
+      if (e.target === overlay) closeOverlay();
+    }
 
-function closeOverlay() { overlay.classList.remove('open'); }
-
-function closeTooltip(e) {
-  if (e.target === overlay) closeOverlay();
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeOverlay();
-});
-</script>
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeOverlay();
+    });
+  </script>
 
 </body>
+
 </html>
